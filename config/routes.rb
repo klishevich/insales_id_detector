@@ -1,6 +1,8 @@
 InsalesApp::Application.routes.draw do
   root to: 'main#index'
 
+  get '/installjs', to: 'main#installjs'
+
   resource  :session do
     collection do
       get :autologin
