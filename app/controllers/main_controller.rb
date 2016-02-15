@@ -6,19 +6,19 @@ class MainController < ApplicationController
   end
 
   def installjs
-  	  #my_app = self.current_app
-
-	  # uri = URI.parse("http://busation.myinsales.ru/admin/js_tags.xml")
-	  # req = Net::HTTP.new(uri.hostname, uri.port)
-	  # xml_data = %{<?xml version="1.0" encoding="UTF-8"?>
-	  # <js-tag>
-   #  	<type type="string">JsTag::FileTag</type>
-   #  	<content>http://busation.com/file.js</content>
-	  # </js-tag>}
-	  # base64user_and_pass = "4e95366ab96fe339e38123732ea08570"
-	  # res = req.post(uri.path, xml_data, {'Content-Type' => 'text/xml', 'Content-Length' => xml_data.length.to_s, 'Authorization' => "Basic #{base64user_and_pass}", "Connection" => "keep-alive" })
-	  # @res1 = res.body
-	  @res1 = @account.insales_subdomain
-	  @res2 = 'test'
+  	  my_subdomain = @account.insales_subdomain
+  	  my_pass = @account.password
+  	  my_url = "http://" + my_subdomain + "/admin/js_tags.xml"
+	  uri = URI.parse(my_url)
+	  req = Net::HTTP.new(uri.hostname, uri.port)
+	  xml_data = %{<?xml version="1.0" encoding="UTF-8"?>
+	  <js-tag>
+    	<type type="string">JsTag::FileTag</type>
+    	<content>http://www.busation.com/assets/application-22d02ec7221607ea6e60cfb943c49d0a.js</content>
+	  </js-tag>}
+	  res = req.post(uri.path, xml_data, {'Content-Type' => 'text/xml', 'Content-Length' => xml_data.length.to_s, 'Authorization' => "Basic #{my_pass}", "Connection" => "keep-alive" })
+	  @res1 = res.body
+	  @res2 = my_url
+	  @res3 = my_pass
   end
 end
