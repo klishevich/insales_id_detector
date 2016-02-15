@@ -9,7 +9,7 @@ set :scm, :git
 set :repo_url, 'git@github.com:klishevich/insales_id_detector.git'
 set :assets_roles, [:app]
 set :keep_releases, 5
-set :linked_files, %w{config/database.yml config/secrets.yml config/initializers/insales_api.rb}
+set :linked_files, %w{config/database.yml config/secrets.yml config/initializers/insales_api.rb db/production.sqlite3}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 set :tests, []
 set(:config_files, %w(
@@ -29,19 +29,27 @@ set(:symlinks, [
 
 namespace :deploy do
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-	    before :deploy, "deploy:check_revision"
-	    after :finishing, 'deploy:cleanup'
-  	  after 'deploy:setup_config', 'nginx:reload'
-      after 'deploy:publishing', 'deploy:restart'
-    end
-  end
-
   desc 'Restart application'
   task :restart do
-    invoke 'unicorn:restart2'
-  end   
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      invoke 'unicorn:restart2'
+    end
+  end
+  after 'deploy:publishing', 'deploy:restart' 
+
+  # after :restart, :clear_cache do
+  #   on roles(:web), in: :groups, limit: 3, wait: 10 do
+	 #    before :deploy, "deploy:check_revision"
+	 #    after :finishing, 'deploy:cleanup'
+  # 	  after 'deploy:setup_config', 'nginx:reload'
+  #     after 'deploy:publishing', 'deploy:restart'
+  #   end
+  # end
+
+  # desc 'Restart application'
+  # task :restart do
+  #   invoke 'unicorn:restart2'
+  # end   
 
 end
 
@@ -50,7 +58,7 @@ namespace :unicorn do
   desc 'Restart unicorn 2'
   task :restart2 do
     on roles(:app) do
-      execute "/etc/init.d/unicorn_insales_id_detector_production restart"
+      execute "/etc/init.d/unicorn_insales_id_detector restart"
     end
   end  
 
