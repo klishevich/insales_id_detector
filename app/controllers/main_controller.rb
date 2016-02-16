@@ -7,6 +7,7 @@ class MainController < ApplicationController
 
   def installjs_post
   	code = params[:code]
+  	esc_code = code.encode(:xml => :attr)
   	Rails.logger.info(' code: ')
   	Rails.logger.info(code)
   	my_subdomain = @account.insales_subdomain
@@ -21,7 +22,7 @@ class MainController < ApplicationController
 	xml_data = %{<?xml version="1.0" encoding="UTF-8"?>
 	  <js-tag>
 		<type type="string">JsTag::TextTag</type>
-		<content>} + code + %{</content>
+		<content>} + esc_code + %{</content>
 	  </js-tag>}
 	uri = URI.parse(my_url)
 	request = Net::HTTP::Post.new uri.path
@@ -31,6 +32,7 @@ class MainController < ApplicationController
 	request.content_type = 'text/xml'
 	request.basic_auth 'id_detector', my_pass
 	response = Net::HTTP.new(uri.host, uri.port).start { |http| http.request request }
+	Rails.logger.info( 'response body:' )
 	Rails.logger.info(response.body)
 	redirect_to '/installjs'
   end
