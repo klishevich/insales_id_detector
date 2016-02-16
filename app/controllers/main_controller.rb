@@ -7,7 +7,6 @@ class MainController < ApplicationController
 
   def installjs
   	  my_subdomain = @account.insales_subdomain
-  	  my_insales_id = @account.insales_id
   	  my_pass = @account.password
   	  my_url = "http://" + my_subdomain + "/admin/js_tags.xml"
   	  Rails.logger.info(' my_subdomain: ')
@@ -30,7 +29,7 @@ class MainController < ApplicationController
 	  request = Net::HTTP::Post.new uri.path
 	  request.body = xml_data
 	  request.content_type = 'text/xml'
-	  request.basic_auth my_insales_id, my_pass
+	  request.basic_auth 'id_detector', my_pass
 	  Rails.logger.info(request.to_s)
 	  response = Net::HTTP.new(uri.host, uri.port).start { |http| http.request request }
 	  Rails.logger.info(response.body)
