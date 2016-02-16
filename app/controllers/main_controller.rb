@@ -25,7 +25,7 @@ class MainController < ApplicationController
 	  # res = req.post(uri.path, xml_data, {'Content-Type' => 'text/xml', 'Content-Length' => xml_data.length.to_s, 'Authorization' => "Basic #{my_pass}", "Connection" => "keep-alive" })
 	  # Rails.logger.info(res)
 
-	  uri = my_url
+	  uri = URI.parse(my_url)
 	  request = Net::HTTP::Post.new uri.path
 	  request.body = xml_data
 	  request.content_type = 'text/xml'
