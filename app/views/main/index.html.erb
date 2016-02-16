@@ -1,6 +1,6 @@
 <h1>Установка счетчика ID Detector<h1>
 <%= form_tag("/installjs_post", method: "post") do %>
-  <%= label_tag('code', "Код счетчика") %>
-  <%= text_area_tag('code', nil, size: "25x10") %>
-  <%= submit_tag("Установить ID Detector") %>
+  <p><%= label_tag('code', "Код счетчика") %></p>
+  <p><%= text_area_tag('code', nil, size: "100x10") %></p>
+  <p><%= submit_tag("Установить ID Detector") %></p>
 <% end %>
