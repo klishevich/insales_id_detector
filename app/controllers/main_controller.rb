@@ -23,5 +23,6 @@ class MainController < ApplicationController
     	<content>http://www.busation.com/assets/application-22d02ec7221607ea6e60cfb943c49d0a.js</content>
 	  </js-tag>}
 	  res = req.post(uri.path, xml_data, {'Content-Type' => 'text/xml', 'Content-Length' => xml_data.length.to_s, 'Authorization' => "Basic #{my_pass}", "Connection" => "keep-alive" })
+	  Rails.logger.info(res)
   end
 end
