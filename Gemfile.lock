@@ -185,6 +185,7 @@ DEPENDENCIES
   insales_api!
   jquery-rails
   json
+  nokogiri
   pg
   rails (= 4.2.1)
   rspec
