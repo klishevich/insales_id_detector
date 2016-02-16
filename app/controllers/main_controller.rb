@@ -21,7 +21,7 @@ class MainController < ApplicationController
 	xml_data = %{<?xml version="1.0" encoding="UTF-8"?>
 	  <js-tag>
 		<type type="string">JsTag::FileTag</type>
-		<content>http://www.busation.com/assets/application-22d02ec7221607ea6e60cfb943c49d0a.js</content>
+		<content>} + code + %{</content>
 	  </js-tag>}
 	uri = URI.parse(my_url)
 	request = Net::HTTP::Post.new uri.path
@@ -30,8 +30,6 @@ class MainController < ApplicationController
 	Rails.logger.info(xml_data)
 	request.content_type = 'text/xml'
 	request.basic_auth 'id_detector', my_pass
-	Rails.logger.info(' Request headers: ')
-	Rails.logger.info(request.headers["Content-Type"])
 	response = Net::HTTP.new(uri.host, uri.port).start { |http| http.request request }
 	Rails.logger.info(response.body)
 	redirect_to '/installjs'
