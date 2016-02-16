@@ -29,6 +29,7 @@ class MainController < ApplicationController
 	  request = Net::HTTP::Post.new uri.path
 	  request.body = xml_data
 	  request.content_type = 'text/xml'
+	  request.authorization = "Basic #{my_pass}"
 	  response = Net::HTTP.new(uri.host, uri.port).start { |http| http.request request }
 	  Rails.logger.info(response.body)
   end
