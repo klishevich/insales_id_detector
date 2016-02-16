@@ -12,10 +12,11 @@ class MainController < ApplicationController
   	Rails.logger.info(code)
   	code_doc = Nokogiri::XML(code)
   	# src_value = code_doc.xpath('//noindex/script/@src').first.value
-  	src_value = ""
-  	code_doc.css("script").each do |node|
-  		src_value = node["src"]
-	end
+ #  	src_value = ""
+ #  	code_doc.css("script").each do |node|
+ #  		src_value = node["src"]
+	# end
+	src_value = code_doc.xpath('//noindex').first.children.last.to_s
   	Rails.logger.info(' src_value: ')
   	Rails.logger.info(src_value)
   	str_index = src_value.index('base64')
