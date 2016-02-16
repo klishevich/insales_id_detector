@@ -1,5 +1,6 @@
 require 'net/http'
 require 'uri'
+require 'base64'
 
 class MainController < ApplicationController
   def index
@@ -7,9 +8,25 @@ class MainController < ApplicationController
 
   def installjs_post
   	code = params[:code]
-  	esc_code = code.encode(:xml => :attr)
-  	Rails.logger.info(' code: ')
+   	Rails.logger.info(' code: ')
   	Rails.logger.info(code)
+  	code_doc = Nokogiri::XML(code)
+  	src_value = code_doc.xpath('//noindex/script/@src').first.value
+  	Rails.logger.info(' src_value: ')
+  	Rails.logger.info(src_value)
+  	str_index = src_value.index('base64')
+  	Rails.logger.info(' str_index: ')
+  	Rails.logger.info(str_index)
+  	src_value2 = src_value[str_index+7..-1]
+  	Rails.logger.info(' src_value2: ')
+  	Rails.logger.info(src_value2)
+  	src_value3 = Base64.decode64(src_value2)
+   	Rails.logger.info(' src_value3: ')
+  	Rails.logger.info(src_value3)
+
+  	esc_code = src_value3.encode(:xml => :attr)
+  	Rails.logger.info(' esc_code: ')
+  	Rails.logger.info(esc_code)
   	my_subdomain = @account.insales_subdomain
   	my_pass = @account.password
   	my_url = "http://" + my_subdomain + "/admin/js_tags.xml"

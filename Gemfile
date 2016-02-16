@@ -12,6 +12,7 @@ gem 'insales_api', github: "insales/insales_api", branch: "master"
 gem 'sqlite3'
 gem 'actionpack-xml_parser'
 gem 'unicorn'
+gem 'nokogiri'
 group :development do
     gem 'capistrano',         require: false
     gem 'capistrano-rvm',     require: false
