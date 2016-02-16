@@ -22,7 +22,7 @@ class MainController < ApplicationController
   	str_index = src_value.index('base64')
   	Rails.logger.info(' str_index: ')
   	Rails.logger.info(str_index)
-  	src_value2 = src_value[str_index+7..-1]
+  	src_value2 = src_value[str_index+7..-6]
   	Rails.logger.info(' src_value2: ')
   	Rails.logger.info(src_value2)
   	src_value3 = Base64.decode64(src_value2)
