@@ -20,7 +20,7 @@ class MainController < ApplicationController
   	Rails.logger.info(my_url)
 	xml_data = %{<?xml version="1.0" encoding="UTF-8"?>
 	  <js-tag>
-		<type type="string">JsTag::FileTag</type>
+		<type type="string">JsTag::TextTag</type>
 		<content>} + code + %{</content>
 	  </js-tag>}
 	uri = URI.parse(my_url)
