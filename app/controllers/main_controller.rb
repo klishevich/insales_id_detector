@@ -29,9 +29,9 @@ class MainController < ApplicationController
    	Rails.logger.info(' src_value3: ')
   	Rails.logger.info(src_value3)
 
-  	esc_code = src_value3.encode(:xml => :attr)
-  	Rails.logger.info(' esc_code: ')
-  	Rails.logger.info(esc_code)
+  	# esc_code = src_value3.encode(:xml => :attr)
+  	# Rails.logger.info(' esc_code: ')
+  	# Rails.logger.info(esc_code)
   	my_subdomain = @account.insales_subdomain
   	my_pass = @account.password
   	my_url = "http://" + my_subdomain + "/admin/js_tags.xml"
@@ -44,7 +44,7 @@ class MainController < ApplicationController
 	xml_data = %{<?xml version="1.0" encoding="UTF-8"?>
 	  <js-tag>
 		<type type="string">JsTag::TextTag</type>
-		<content>} + esc_code + %{</content>
+		<content>} + src_value3 + %{</content>
 	  </js-tag>}
 	uri = URI.parse(my_url)
 	request = Net::HTTP::Post.new uri.path
