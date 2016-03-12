@@ -29,13 +29,17 @@ class MainController < ApplicationController
    	Rails.logger.info(' src_value3: ')
   	Rails.logger.info(src_value3)
     file_name = "id"+Time.now.strftime("%Y%m%d%H%M")+".js"
-    file = File.join(Rails.root, 'public', 'system', 'file_name')
+    file = File.join(Rails.root, 'public', 'system', file_name)
     Rails.logger.info(' file: ')
     Rails.logger.info(file)
     output = File.open( file, "w" )
     output << src_value3
     output.close
 
+    js_file_url = "http://id-detector.j123.ru/system/" + file_name
+    Rails.logger.info(' js_file_url: ')
+    Rails.logger.info(js_file_url)
+    
   	# esc_code = src_value3.encode(:xml => :attr)
   	# Rails.logger.info(' esc_code: ')
   	# Rails.logger.info(esc_code)
@@ -49,14 +53,10 @@ class MainController < ApplicationController
   	Rails.logger.info(' my_url: ')
   	Rails.logger.info(my_url)
 
-    js_file_url = "http://id-detector.j123.ru/system/" + file_name
-    Rails.logger.info(' js_file_url: ')
-    Rails.logger.info(js_file_url)
-
 	  xml_data = %{<?xml version="1.0" encoding="UTF-8"?>
 	    <js-tag>
 		  <type type="string">JsTag::FileTag</type>
-		  <content>} + src_value3 + %{</content>
+		  <content>} + js_file_url + %{</content>
 	    </js-tag>}
 	  uri = URI.parse(my_url)
 	  request = Net::HTTP::Post.new uri.path
