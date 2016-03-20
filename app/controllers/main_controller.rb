@@ -11,11 +11,6 @@ class MainController < ApplicationController
    	Rails.logger.info(' code: ')
   	Rails.logger.info(code)
   	code_doc = Nokogiri::XML(code)
-  	# src_value = code_doc.xpath('//noindex/script/@src').first.value
- #  	src_value = ""
- #  	code_doc.css("script").each do |node|
- #  		src_value = node["src"]
-	# end
 	  src_value = code_doc.xpath('//noindex').first.children.last.to_s
   	Rails.logger.info(' src_value: ')
   	Rails.logger.info(src_value)
@@ -40,9 +35,6 @@ class MainController < ApplicationController
     Rails.logger.info(' js_file_url: ')
     Rails.logger.info(js_file_url)
     
-  	# esc_code = src_value3.encode(:xml => :attr)
-  	# Rails.logger.info(' esc_code: ')
-  	# Rails.logger.info(esc_code)
   	my_subdomain = @account.insales_subdomain
   	my_pass = @account.password
   	my_url = "http://" + my_subdomain + "/admin/js_tags.xml"
