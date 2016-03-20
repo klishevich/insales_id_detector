@@ -2,10 +2,10 @@
 <p>Для установки счетчика выполните следующие действия:</p>
 <ol>
 	<li>Зарегистрируйтесь на сайте ID-DETECTOR - <a href="http://id-detector.ru/">http://id-detector.ru</a>;</li>
-	<li>Добавьте Ваш интернет-магазин <a href="https://user.id-detector.ru/mysites">https://user.id-detector.ru/mysites</a> и получите код счетчика для вставки;</li>
+	<li>Добавьте Ваш интернет-магазин в список сайтов и получите код счетчика для вставки;</li>
 	<li>Вставьте код в поле и нажмите кнопку "Установить ID-DETECTOR".</li>
 </ol>
-<p>Видео-инструкция по регистрации на сайте ID-DETECTOR <a href="https://vimeo.com/153821338">тут</a>.</p>
+<p><a href="https://vimeo.com/153821338">Видео-инструкция тут</a>.</p>
 <%= form_tag("/installjs_post", method: "post") do %>
   <p><%= label_tag('code', "Код счетчика") %></p>
   <p><%= text_area_tag('code', nil, size: "100x10") %></p>
