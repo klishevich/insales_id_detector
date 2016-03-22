@@ -4,10 +4,10 @@ class AdminController < ApplicationController
 
   def authenticate
     Rails.logger.info(' http_basic_name: ')
-    Rails.logger.info(ENV["http_basic_name"])
-    Rails.logger.info(ENV["http_basic_pass"])
+    Rails.logger.info(Figaro.env.http_basic_name)
+    Rails.logger.info(Figaro.env.http_basic_pass)
     authenticate_or_request_with_http_basic do |username, password|
-      session[:authenticated] = username == ENV["http_basic_name"] && password == ENV["http_basic_pass"]
+      session[:authenticated] = username == Figaro.env.http_basic_name && password == Figaro.env.http_basic_pass
     end
   end
 
