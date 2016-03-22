@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  skip_before_filter :authentication
+  skip_before_filter :authentication, :configure_api
   before_filter :authenticate
 
   def authenticate
