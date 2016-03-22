@@ -1,16 +1,19 @@
-<h1>Установка счетчика ID Detector</h1>
-<p>Для установки счетчика выполните следующие действия:</p>
-<ol>
-	<li>Зарегистрируйтесь на сайте ID-DETECTOR - <a href="http://id-detector.ru/">http://id-detector.ru</a>;</li>
-	<li>Добавьте Ваш интернет-магазин в список сайтов и получите код счетчика для вставки;</li>
-	<li>Вставьте код в поле и нажмите кнопку "Установить ID-DETECTOR".</li>
-</ol>
-<p><a href="https://vimeo.com/153821338">Видео-инструкция тут</a>.</p>
-<%= form_tag("/installjs_post", method: "post") do %>
-  <p><%= label_tag('code', "Код счетчика") %></p>
-  <p><%= text_area_tag('code', nil, size: "100x10") %></p>
-  <p><%= submit_tag("Установить ID-DETECTOR") %></p>
+<% if @account.has_counter? %>
+  <h1>Счетчик ID-DETECTOR установлен</h1>
+  <p>На сайте <%=@account.insales_subdomain%> установлен счетчик. Спасибо что выбрали нас. </p>
+  <p>Перейти на сайт ID-DETECTOR - <a href="http://id-detector.ru/">http://id-detector.ru</a></p>
+<% else %>
+	<h1>Установка счетчика ID Detector</h1>
+	<p>Для установки счетчика выполните следующие действия:</p>
+	<ol>
+		<li>Зарегистрируйтесь на сайте ID-DETECTOR - <a href="http://id-detector.ru/">http://id-detector.ru</a>;</li>
+		<li>Добавьте Ваш интернет-магазин в список сайтов и получите код счетчика для вставки;</li>
+		<li>Вставьте код в поле и нажмите кнопку "Установить ID-DETECTOR".</li>
+	</ol>
+	<p><a href="https://vimeo.com/153821338">Видео-инструкция тут</a>.</p>
+	<%= form_tag("/installjs_post", method: "post") do %>
+	  <p><%= label_tag('code', "Код счетчика") %></p>
+	  <p><%= text_area_tag('code', nil, size: "100x10") %></p>
+	  <p><%= submit_tag("Установить ID-DETECTOR") %></p>
+	<% end %>
 <% end %>
-
-<h1>Результат установки скрипта ID Detector</h1>
-<p>Счетчик установлен успешно</p>
