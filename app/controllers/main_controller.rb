@@ -60,6 +60,7 @@ class MainController < ApplicationController
 	  response = Net::HTTP.new(uri.host, uri.port).start { |http| http.request request }
 	  Rails.logger.info( 'response body:' )
 	  Rails.logger.info(response.body)
+    @account.set_has_counter
 	  redirect_to '/installjs'
   end
 
