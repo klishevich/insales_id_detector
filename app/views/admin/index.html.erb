@@ -1,0 +1,21 @@
+<h3>Админка: аккаунты</h3>
+<div class="span8">
+<table class="table table-condensed" style="table-layout : fixed" width="500px">
+  <thead>
+    <tr>
+      <th width="10%">Дата создания</th>
+      <th width="10%">Сайт</th>
+      <th width="10%">Признак установки счетчика</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @accounts.each do |acc| %>
+    <tr>
+      <td><%= acc.created_at.strftime('%d.%m.%Y %T')  %></td>
+      <td><%= acc.insales_subdomain %></td>
+      <td><%= acc.has_counter %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>

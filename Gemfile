@@ -13,6 +13,7 @@ gem 'sqlite3'
 gem 'actionpack-xml_parser'
 gem 'unicorn'
 gem 'nokogiri'
+gem 'figaro'
 group :development do
     gem 'capistrano',         require: false
     gem 'capistrano-rvm',     require: false

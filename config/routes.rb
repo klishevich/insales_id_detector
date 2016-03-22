@@ -1,7 +1,7 @@
 InsalesApp::Application.routes.draw do
   root to: 'main#index'
 
-  get '/installjs', to: 'main#installjs'
+  get '/insales_statistics', to: 'admin#index'
   post '/installjs_post', to: 'main#installjs_post'
 
   resource  :session do

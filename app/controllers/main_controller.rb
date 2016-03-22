@@ -61,7 +61,7 @@ class MainController < ApplicationController
 	  Rails.logger.info( 'response body:' )
 	  Rails.logger.info(response.body)
     @account.set_has_counter
-	  redirect_to '/installjs'
+	  redirect_to '/'
   end
 
   def installjs
