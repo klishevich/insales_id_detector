@@ -14,24 +14,26 @@ class MainController < ApplicationController
 	  src_value = code_doc.xpath('//noindex').first.children.last.to_s
   	Rails.logger.info(' src_value: ')
   	Rails.logger.info(src_value)
-  	str_index = src_value.index('base64')
-  	Rails.logger.info(' str_index: ')
-  	Rails.logger.info(str_index)
-  	src_value2 = src_value[str_index+7..-6]
+  	# str_index = src_value.index('base64')
+  	# Rails.logger.info(' str_index: ')
+  	# Rails.logger.info(str_index)
+  	# src_value2 = src_value[str_index+7..-6]
+    src_value2 = src_value[5..-2]
   	Rails.logger.info(' src_value2: ')
   	Rails.logger.info(src_value2)
-  	src_value3 = Base64.decode64(src_value2)
-   	Rails.logger.info(' src_value3: ')
-  	Rails.logger.info(src_value3)
-    file_name = "id"+Time.now.strftime("%Y%m%d%H%M")+".js"
-    file = File.join(Rails.root, 'public', 'system', file_name)
-    Rails.logger.info(' file: ')
-    Rails.logger.info(file)
-    output = File.open( file, "w" )
-    output << src_value3
-    output.close
+  	# src_value3 = Base64.decode64(src_value2)
+   	# Rails.logger.info(' src_value3: ')
+  	# Rails.logger.info(src_value3)
+    # file_name = "id"+Time.now.strftime("%Y%m%d%H%M")+".js"
+    # file = File.join(Rails.root, 'public', 'system', file_name)
+    # Rails.logger.info(' file: ')
+    # Rails.logger.info(file)
+    # output = File.open( file, "w" )
+    # output << src_value3
+    # output.close
 
-    js_file_url = "http://id-detector.j123.ru/system/" + file_name
+    # js_file_url = "http://id-detector.j123.ru/system/" + file_name
+    js_file_url = src_value2
     Rails.logger.info(' js_file_url: ')
     Rails.logger.info(js_file_url)
     

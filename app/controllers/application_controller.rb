@@ -11,8 +11,15 @@ class ApplicationController < ActionController::Base
   def authentication
     logout if enter_from_different_shop?
 
-    if current_app and current_app.authorized?
-      return if @account = Account.find_by(insales_subdomain: current_app.shop)
+    if (current_app and current_app.authorized?) or (Rails.env == "development")
+      acc = Account.find_by(insales_subdomain: 'busation.myinsales.ru')
+      Rails.logger.info('acc')
+      Rails.logger.info(acc.insales_subdomain) if acc
+      if (Rails.env == "development")
+        return if @account = Account.find_by(insales_subdomain: 'busation.myinsales.ru')
+      else
+        return if @account = Account.find_by(insales_subdomain: current_app.shop)
+      end
     end
 
     store_location
