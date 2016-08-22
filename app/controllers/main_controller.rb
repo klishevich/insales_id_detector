@@ -18,7 +18,7 @@ class MainController < ApplicationController
   	# Rails.logger.info(' str_index: ')
   	# Rails.logger.info(str_index)
   	# src_value2 = src_value[str_index+7..-6]
-    src_value2 = src_value[5..-2]
+    src_value2 = src_value[5..-6]
   	Rails.logger.info(' src_value2: ')
   	Rails.logger.info(src_value2)
   	# src_value3 = Base64.decode64(src_value2)
@@ -33,7 +33,7 @@ class MainController < ApplicationController
     # output.close
 
     # js_file_url = "http://id-detector.j123.ru/system/" + file_name
-    js_file_url = src_value2
+    js_file_url = "http:" + src_value2
     Rails.logger.info(' js_file_url: ')
     Rails.logger.info(js_file_url)
     
